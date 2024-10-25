@@ -60,6 +60,7 @@ main :: proc() {
         rl.EndDrawing()
     }
 
+    clear_memory()
     unload_texture()
     rl.CloseWindow()
 }

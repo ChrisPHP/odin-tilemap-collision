@@ -106,15 +106,13 @@ create_4bit_map :: proc() {
 
                 elem, ok := TILE_LAYERS[size]
                 if ok == false || autotile != 0 {
-                    new_array := make([dynamic]layerStruct)
-                    for e in elem {
-                        append(&new_array, e)
+                    new_layer := make([]layerStruct, len(elem) + 1)
+                    copy(new_layer, elem)
+                    new_layer[len(elem)] = layerStruct{key, autotile}
+                    if ok {
+                        delete(elem)
                     }
-                    append(&new_array, layerStruct{key, autotile})
-                    new_slice := make([]layerStruct, len(new_array))
-                    copy(new_slice, new_array[:])
-                    TILE_LAYERS[size] = new_slice
-                    delete(new_array)
+                    TILE_LAYERS[size] = new_layer
                 }
             }
         }
@@ -182,4 +180,12 @@ load_background :: proc() {
             rl.DrawRectangleLines(x, y, CELL_SIZE, CELL_SIZE, rl.DARKGRAY)
         }
     }
+}
+
+
+clear_memory :: proc() {
+    for size, array in TILE_LAYERS {
+        delete(array)
+    }
+    clear(&TILE_LAYERS)
 }
