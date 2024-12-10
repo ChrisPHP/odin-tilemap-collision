@@ -1,4 +1,5 @@
 # Tilemap Collision and Renderer
+![Screenshot of the path made with JPS](docs/example.png)
 Example of pixel perfect tilemap collision with code to render a wang tile tilemap for smooth borders.
 
 ## Tilemap Collision
